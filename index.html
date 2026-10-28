@@ -26,7 +26,7 @@ var namMember = new Array(
 //*********************************************************
 
 var lstMember = new Array();
-var parent = new Array();
+var parentIdx = new Array();
 var equal = new Array();
 var rec = new Array();
 var cmp1,cmp2;
@@ -48,7 +48,7 @@ lstMember[n] = new Array();
 for (i=0; i<namMember.length; i++) {
 lstMember[n][i] = i;
 }
-parent[n] = -1;
+parentIdx[n] = -1;
 totalSize = 0;
 n++;
 
@@ -58,12 +58,12 @@ mid = Math.ceil(lstMember[i].length/2);
 lstMember[n] = new Array();
 lstMember[n] = lstMember[i].slice(0,mid);
 totalSize += lstMember[n].length;
-parent[n] = i;
+parentIdx[n] = i;
 n++;
 lstMember[n] = new Array();
 lstMember[n] = lstMember[i].slice(mid,lstMember[i].length);
 totalSize += lstMember[n].length;
-parent[n] = i;
+parentIdx[n] = i;
 n++;
 }
 }
@@ -158,7 +158,7 @@ finishSize++;
 
 if (head1==lstMember[cmp1].length && head2==lstMember[cmp2].length) {
 for (i=0; i<lstMember[cmp1].length+lstMember[cmp2].length; i++) {
-lstMember[parent[cmp1]][i] = rec[i];
+lstMember[parentIdx[cmp1]][i] = rec[i];
 }
 lstMember.pop();
 lstMember.pop();
@@ -227,6 +227,7 @@ numQuestion++;
 }
 </script>
 <style type="text/css">
+body{-webkit-user-select:none;user-select:none;touch-action:manipulation;-webkit-tap-highlight-color:transparent}
 #mainTable{
 font-size: 14px;
 font-family: 'Apple SD Gothic Neo','Noto Sans KR','돋움',sans-serif;
@@ -269,10 +270,15 @@ cursor: pointer;
 </tr>
 </table><br><br>
 <div id="resultField" style="text-align:center;"></div>
-<p style="text-align:center; font-size:13px; font-family:serif; margin-top:40px;">최종 업데이트: GREENGREEN (26.10.29)</p>
+<p style="text-align:center; font-size:13px; font-family:serif; margin-top:40px;">최종 업데이트: (26.10.29)</p>
 <script type="text/javascript">
+if (namMember.length < 2) {
+document.getElementById("battleNumber").innerHTML = "곡을 2개 이상 넣어줘";
+finishFlag = 1;
+} else {
 initList();
 showImage();
+}
 </script>
 </body>
 </html>
